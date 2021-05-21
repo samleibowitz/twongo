@@ -64,5 +64,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # add ngrok host
-  config.hosts << ENV['HOST_URL']
+  config.hosts << ENV["HOST_URL"]
 end

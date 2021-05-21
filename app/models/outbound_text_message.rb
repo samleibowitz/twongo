@@ -5,5 +5,4 @@ class OutboundTextMessage < ApplicationDocument
   field :media_url, type: Array
   field :recipient_number, type: String
   field :delivered, type: Boolean
-
 end
