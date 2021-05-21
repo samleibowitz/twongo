@@ -1,17 +1,21 @@
 module TextMessage::Delivery
   # send message to Twilio for delivery
   def deliver!
-    client.messages.create(
-      from: ENV['TWILIO_PHONE_NUMBER'],
-      to: recipient_number,
-      body: message_body ,
-      media_url: ['https://i1.sndcdn.com/artworks-000243212041-hcomm5-t500x500.jpg']
-    )
-    
+    client.messages.create(delivery_params)    
     update(delivered: true)
   end
 
   private
+
+  def delivery_params
+    params = {
+      from: ENV['TWILIO_PHONE_NUMBER'],
+      to: recipient_number,
+      body: message_body
+    }
+    params.merge!({media_url: media_url}) if media_url.present?
+    params
+  end
 
   def client
     account_sid = ENV['TWILIO_ACCOUNT_SID']
